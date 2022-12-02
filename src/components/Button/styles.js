@@ -17,13 +17,18 @@ ${({variant}) => variant !== "primary" && css`
 
 	background: #E4105d;
 
+	&:hover {
+		opacity: 0.6;
+		cursor: pointer;
+	}
+
 	&::after {
-		content: '',
+		content: '';
 		position: absolute;
 		border: 1px solid #E4105d;
 		top: -5px;
 		left: -6px;
-		widtg: calc(100% + 10px);
+		width: calc(100% + 10px);
 		height: calc(100% + 10px);
 		border-radius: 22px;
 	}
