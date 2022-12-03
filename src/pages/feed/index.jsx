@@ -1,7 +1,6 @@
 
 
-import banner from '../../assets/banner.png'
-import { Button } from "../../components/Button";
+
 import { Card } from "../../components/Card";
 import { UserInfo } from "../../components/UserInfo";
 import { Header } from "../../components/Header";
@@ -25,11 +24,11 @@ const Feed = () => {
 			</Column>
 			<Column flex={1}>
 				<TitleHighlight># RANKING 5 TOP DA SEMANA</TitleHighlight>
-				<UserInfo percentual={40} nome="Lucas Leão" image="https://avatars.githubusercontent.com/u/68882888?v=4"/>
-				<UserInfo percentual={20} nome="Gabryell Pontes" image="https://avatars.githubusercontent.com/u/68882888?v=4"/>
-				<UserInfo percentual={80} nome="Higor Guilherme" image="https://avatars.githubusercontent.com/u/68882888?v=4"/>
-				<UserInfo percentual={60} nome="João Silva" image="https://avatars.githubusercontent.com/u/68882888?v=4"/>
-				<UserInfo percentual={10} nome="Carlinhos Bala" image="https://avatars.githubusercontent.com/u/68882888?v=4"/>
+				<UserInfo percentual={40} nome="Lucas Leão" image="https://avatars.githubusercontent.com/u/68882888?s=96&v=4"/>
+				<UserInfo percentual={20} nome="Gabryell Pontes" image="https://avatars.githubusercontent.com/u/68882888?s=96&v=4"/>
+				<UserInfo percentual={80} nome="Higor Guilherme" image="https://avatars.githubusercontent.com/u/68882888?s=96&v=4"/>
+				<UserInfo percentual={60} nome="João Silva" image="https://avatars.githubusercontent.com/u/68882888?s=96&v=4"/>
+				<UserInfo percentual={10} nome="Carlinhos Bala" image="https://avatars.githubusercontent.com/u/68882888?s=96&v=4"/>
 			</Column>
 		</Container>
 	</>)
