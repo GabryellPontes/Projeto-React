@@ -31,7 +31,7 @@ const Header = ({autenticado}) => {
 					</Row>
 					<Row>
 						{autenticado ? (
-							<UserPicture src="https://avatars.githubusercontent.com/u/68882888?v=4" />
+							<UserPicture src="https://avatars.githubusercontent.com/u/68882888?s=96&v=4" />
 						) : (
 							<>
 						<MenuRight href='#'>Home</MenuRight>
