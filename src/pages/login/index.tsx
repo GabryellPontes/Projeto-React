@@ -9,6 +9,7 @@ import {useForm} from 'react-hook-form';
 import { Button } from "../../components/Button";
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
+import { IformData } from "./types";
 
 import { Column, Container, CriarText, EsqueciText, Row, SubTitleLogin, Title, TitleLogin, Wrapper} from './styles';
 
@@ -21,14 +22,14 @@ const schema = yup.object({
 const Login = () => {
 	const navigate = useNavigate();
 
-	const { control, handleSubmit, formState: { errors } } = useForm({
+	const { control, handleSubmit, formState: { errors } } = useForm<IformData>({
 		resolver: yupResolver(schema),
 		mode: 'onChange',
 	});
 
-	const onSubmit = async (formData) => {
+	const onSubmit = async (formData: IformData) => {
         try{
-            const {data} = await api.get(`/users?email=${formData.email}&senha=${formData.senha}`);
+            const {data} = await api.get(`/users?email=${formData.email}.}&senha=${formData.password}`);
             
             if(data.length && data[0].id){
                 navigate('/feed') 
@@ -58,7 +59,7 @@ const Login = () => {
                     <Input placeholder="E-mail" leftIcon={<MdEmail />} name="email"  control={control} />
                     {errors.email && <span>E-mail é obrigatório</span>}
                     <Input type="password" placeholder="Senha" leftIcon={<MdLock />}  name="senha" control={control} />
-                    {errors.senha && <span>Senha é obrigatório</span>}
+                    {errors.password && <span>Senha é obrigatório</span>}
                     <Button title="Entrar" variant="secondary" type="submit"/>
                 </form>
                 <Row>
