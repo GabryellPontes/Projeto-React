@@ -1,75 +1,117 @@
-import { useNavigate } from 'react-router-dom';
-import { MdEmail, MdLock } from 'react-icons/md'
+import { useNavigate } from "react-router-dom";
+import { MdEmail, MdLock } from "react-icons/md";
 import { api } from "../../services/api";
-import { yupResolver } from '@hookform/resolvers/yup';
+import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import {useForm} from 'react-hook-form';
+import { useForm } from "react-hook-form";
 
 import { Button } from "../../components/Button";
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
 import { IformData } from "./types";
 
-import { Column, Container, CriarText, EsqueciText, Row, SubTitleLogin, Title, TitleLogin, Wrapper} from './styles';
+import {
+  Column,
+  Container,
+  CriarText,
+  EsqueciText,
+  Row,
+  SubTitleLogin,
+  Title,
+  TitleLogin,
+  Wrapper,
+} from "./styles";
 
-const schema = yup.object({
-	email: yup.string().email('email não é valido').required('Campo obrigatorio'),
-	password: yup.string().min(3, 'No minimo 3 caracteres').required('Campo obrigatorio'),
-  }).required();
-
+const schema = yup
+  .object({
+    email: yup
+      .string()
+      .email("email não é valido")
+      .required("Campo obrigatorio"),
+    password: yup
+      .string()
+      .min(3, "No minimo 3 caracteres")
+      .required("Campo obrigatorio"),
+  })
+  .required();
 
 const Login = () => {
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
-	const { control, handleSubmit, formState: { errors } } = useForm<IformData>({
-		resolver: yupResolver(schema),
-		mode: 'onChange',
-	});
+  const handleClick = () => {
+    navigate("/cadastro");
+  };
 
-	const onSubmit = async (formData: IformData) => {
-        try{
-            const {data} = await api.get(`/users?email=${formData.email}.}&senha=${formData.password}`);
-            
-            if(data.length && data[0].id){
-                navigate('/feed') 
-                return
-            }
-			
-            alert('Usuário ou senha inválido')
-        }catch(e){
-			//TODO: HOUVE UM ERRO
-        }
-    };
-	
-	console.log('errors', errors);
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IformData>({
+    resolver: yupResolver(schema),
+    mode: "onChange",
+  });
 
-	return (<>
-        <Header />
-        <Container>
-            <Column>
-                <Title>A plataforma para você aprender com experts, dominar as principais tecnologias
-                 e entrar mais rápido nas empresas mais desejadas.</Title>
-            </Column>
-            <Column>
-                <Wrapper>
-                <TitleLogin>Faça seu cadastro</TitleLogin>
-                <SubTitleLogin>Faça seu login e make the change._</SubTitleLogin>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <Input placeholder="E-mail" leftIcon={<MdEmail />} name="email"  control={control} />
-                    {errors.email && <span>E-mail é obrigatório</span>}
-                    <Input type="password" placeholder="Senha" leftIcon={<MdLock />}  name="senha" control={control} />
-                    {errors.password && <span>Senha é obrigatório</span>}
-                    <Button title="Entrar" variant="secondary" type="submit"/>
-                </form>
-                <Row>
-                    <EsqueciText>Esqueci minha senha</EsqueciText>
-                    <CriarText>Criar Conta</CriarText>
-                </Row>
-                </Wrapper>
-            </Column>
-        </Container>
-    </>)
-}
+  const onSubmit = async (formData: IformData) => {
+    try {
+      const { data } = await api.get(
+        `/users?email=${formData.email}.}&senha=${formData.password}`
+      );
 
-export { Login }
+      if (data.length && data[0].id) {
+        navigate("/feed");
+        return;
+      }
+
+      alert("Usuário ou senha inválido");
+    } catch (e) {
+      //TODO: HOUVE UM ERRO
+    }
+  };
+
+  console.log("errors", errors);
+
+  return (
+    <>
+      <Header />
+      <Container>
+        <Column>
+          <Title>
+            A plataforma para você aprender com experts, dominar as principais
+            tecnologias e entrar mais rápido nas empresas mais desejadas.
+          </Title>
+        </Column>
+        <Column>
+          <Wrapper>
+            <TitleLogin>Faça seu cadastro</TitleLogin>
+            <SubTitleLogin>Faça seu login e make the change._</SubTitleLogin>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <Input
+                placeholder="E-mail"
+                leftIcon={<MdEmail />}
+                name="email"
+                control={control}
+              />
+              {errors.email && <span>E-mail é obrigatório</span>}
+              <Input
+                type="password"
+                placeholder="Senha"
+                leftIcon={<MdLock />}
+                name="senha"
+                control={control}
+              />
+              {errors.password && <span>Senha é obrigatório</span>}
+              <Button title="Entrar" variant="secondary" type="submit" />
+            </form>
+            <Row>
+              <EsqueciText>Esqueci minha senha</EsqueciText>
+              <CriarText onClick={handleClick}>Criar Conta</CriarText>
+            </Row>
+          </Wrapper>
+        </Column>
+      </Container>
+    </>
+  );
+};
+
+export { Login };
